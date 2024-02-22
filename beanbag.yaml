@@ -1,0 +1,47 @@
+# The Version of the OpenAPI Specification used (swagger for version 2)
+openapi: "3.1.0"
+
+# General information about the API
+info:
+  title: Beanbag AI API
+  version: "1.0"
+  description: |
+    Welcome to Beanbag AI API!
+Our REST API lets you query our exhaustive data repository and enrich your systems, or app. Whether for people, organizations, opportunities, or more, the Beanbag AI API is available to do almost everything the UI offers. In addition to managing data records, you can utilize Beanbag API to automate outreach efforts and customize workflows.
+We are actively developing our API and it is subject to change without prior notice from Beanbag AI. If you have any requests for API methods you’d like to see, please let us know!
+
+# Paths and operations
+paths:
+  /books:
+    summary: Search for books
+    parameters:
+      - name: title
+      in: query
+      # A JSON Schema
+      schema:
+        type: string
+      responses:
+        '200':
+          description: Found books
+          content:
+            application/json:
+              # A JSON Schema
+              schema:
+               type: array
+               items:
+                 # A reference to a reusable schema
+                 $ref: '#components/schemas/Book'
+
+components:
+  schemas:
+    # A reusable schema named Book
+    Book:
+      properties:
+        isbn:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        price:
+          type: number
